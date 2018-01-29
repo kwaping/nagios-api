@@ -1,8 +1,13 @@
-rpm:
-	python setup.py bdist_rpm --requires 'diesel>=3.0 greenlet==0.3.4 requests'
+.PHONY: clean all
 
-readme:
+all: clean rpm
+
+rpm:
+	python setup.py bdist_rpm --requires 'python-diesel >= 3.0, python-greenlet >= 0.3.4, python-requests'
+
+readme: README.md
 	rm -f README && pandoc -f markdown -t plain README.md -o README
 
 clean:
-	rm -rf build
+	rm -rf build/ dist/
+
